@@ -3,17 +3,19 @@ FROM python:3.5-slim
 LABEL maintainer="software@rero.ch"
 LABEL description="Integrated Library System flavour of Invenio by RERO. Devel version."
 
-RUN apt-get update && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs gcc git \
-    && pip install -U setuptools pip && \
-	pip install -U virtualenv && \
+RUN apt-get update && apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -y nodejs gcc git && \
+    pip install -U setuptools pip && \
+    pip install -U virtualenv && \
     npm install -g node-sass clean-css clean-css-cli requirejs uglify-js
 
 
 # # Run container as user `invenio` with UID `1000`, which should match
 # # current host user in most situations:
-RUN adduser --uid 1000 --disabled-password --gecos '' invenio
+RUN adduser --uid 1000 --disabled-password --gecos '' invenio && \
+    mkdir /home/invenio/reroils && \
+    chown invenio:invenio /home/invenio/reroils
 
 USER invenio
 
