@@ -101,6 +101,26 @@ RECORDS_REST_ENDPOINTS = dict(
         default_media_type='application/json',
         max_result_window=10000,
     ),
+    auth=dict(
+        pid_type='auth',
+        pid_minter='auth_id',
+        pid_fetcher='auth_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/',
+        item_route='/authorities/<pid(auth):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
     doc_csv=dict(
         pid_type='doc',
         pid_minter='document_id',
@@ -234,6 +254,11 @@ RECORDS_UI_ENDPOINTS = {
         "template": "reroils_data/detailed_view_documents_items.html",
         "view_imp": "reroils_data.documents_items.views.doc_item_view_method",
         "record_class": "reroils_data.documents_items.api:DocumentsWithItems"
+    },
+    "auth": {
+        "pid_type": "auth",
+        "route": "/authorities/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities.html"
     },
     "doc_export": {
         "pid_type": "doc",
