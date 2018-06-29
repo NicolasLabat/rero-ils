@@ -15,45 +15,83 @@ if [ $# -ne 1 ]; then
    exit 1
 fi
 
+function load_viaf() {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/viaf.json ]; then
+        echo "File viaf.json not found!"
+    else
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/viaf.json schema http://ils.test.rero.ch/schema/authorities/viaf-v0.0.1.json | invenio records create --pid-minter auth_id
+        invenio index reindex --yes-i-know --pid-type auth
+        invenio index run -c 4
+    fi
+}
+
+
+function load_bnf()  {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/bnf.json ]; then
+        echo "File bnf.json not found!"
+    else
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/bnf.json schema http://ils.test.rero.ch/schema/authorities/bnf-v0.0.1.json | invenio records create --pid-minter auth_id
+        invenio index reindex --yes-i-know --pid-type auth
+        invenio index run -c 4
+    fi
+}
+
+
+function load_gnd() {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/gnd.json ]; then
+        echo "File gnd.json not found!"
+    else
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/gnd.json schema http://ils.test.rero.ch/schema/authorities/gnd-v0.0.1.json | invenio records create --pid-minter auth_id
+        invenio index reindex --yes-i-know --pid-type auth
+        invenio index run -c 4
+    fi
+}
+
+
+function load_rero() {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/rero.json ]; then
+        echo "File rero.json not found!"
+    else
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-v0.0.1.json | invenio records create --pid-minter auth_id
+        invenio index reindex --yes-i-know --pid-type auth
+        invenio index run -c 4
+    fi
+}
+
+function load_reroils() {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/reroils.json ]; then
+        echo "File reroils.json not found!"
+    else
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-v0.0.1.json | invenio records create --pid-minter auth_id
+        invenio index reindex --yes-i-know --pid-type auth
+        invenio index run -c 4
+    fi
+}
+
 case $1 in 
     viaf)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/viaf.json schema http://ils.test.rero.ch/schema/authorities/viaf-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-     ;;
-
+        load_viaf
+    ;;
     bnf)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/bnf.json schema http://ils.test.rero.ch/schema/authorities/bnf-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-     ;;
-
+        load_bnf
+    ;;
     gnd)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/gnd.json schema http://ils.test.rero.ch/schema/authorities/gnd-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-     ;;
-
-    reroils)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-     ;;
-
+        load_gnd
+    ;;
     rero)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-     ;;
+        load_rero
+    ;;
+    reroils)                                
+        load_reroils
+    ;;
     all)                                
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-v0.0.1.json | invenio records create --pid-minter auth_id
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/bnf.json schema http://ils.test.rero.ch/schema/authorities/bnf-v0.0.1.json | invenio records create --pid-minter auth_id
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/gnd.json schema http://ils.test.rero.ch/schema/authorities/gnd-v0.0.1.json | invenio records create --pid-minter auth_id
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-v0.0.1.json | invenio records create --pid-minter auth_id
-     dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-v0.0.1.json | invenio records create --pid-minter auth_id
-     invenio index reindex --yes-i-know --pid-type auth
-     invenio index run -c 4
-  ;;
+        load_viaf
+        load_bnf
+        load_gnd
+        load_rero
+        load_reroils
+    ;;
+    *)
+        echo "Invalid input!"
+    ;;
 esac
-
-
