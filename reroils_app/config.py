@@ -121,6 +121,26 @@ RECORDS_REST_ENDPOINTS = dict(
         default_media_type='application/json',
         max_result_window=10000,
     ),
+    viaf=dict(
+        pid_type='viaf',
+        pid_minter='viaf_id',
+        pid_fetcher='viaf_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/viaf',
+        item_route='/authorities/viaf/<pid(viaf):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
     doc_csv=dict(
         pid_type='doc',
         pid_minter='document_id',
@@ -259,6 +279,11 @@ RECORDS_UI_ENDPOINTS = {
         "pid_type": "auth",
         "route": "/authorities/<pid_value>",
         "template": "reroils_data/detailed_view_authorities.html"
+    },
+    "auth": {
+        "pid_type": "viaf",
+        "route": "/authorities/viaf/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities_viaf.html"
     },
     "doc_export": {
         "pid_type": "doc",

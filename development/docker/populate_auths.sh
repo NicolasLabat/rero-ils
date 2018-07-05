@@ -19,8 +19,8 @@ function load_viaf() {
     if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/viaf.json ]; then
         echo "File viaf.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/viaf.json schema http://ils.test.rero.ch/schema/authorities/viaf-v0.0.1.json | invenio records create --pid-minter auth_id
-        invenio index reindex --yes-i-know --pid-type auth
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/viaf.json schema http://ils.test.rero.ch/schema/authorities/viaf-v0.0.1.json | invenio records create --pid-minter viaf_id
+        invenio index reindex --yes-i-know --pid-type viaf
         invenio index run -c 4
     fi
 }
