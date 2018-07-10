@@ -141,6 +141,86 @@ RECORDS_REST_ENDPOINTS = dict(
         default_media_type='application/json',
         max_result_window=10000,
     ),
+    bnf=dict(
+        pid_type='bnf',
+        pid_minter='bnf_id',
+        pid_fetcher='bnf_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/bnf',
+        item_route='/authorities/bnf/<pid(bnf):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
+    gnd=dict(
+        pid_type='gnd',
+        pid_minter='gnd_id',
+        pid_fetcher='gnd_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/gnd',
+        item_route='/authorities/gnd/<pid(gnd):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
+    rero=dict(
+        pid_type='rero',
+        pid_minter='rero_id',
+        pid_fetcher='rero_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/rero',
+        item_route='/authorities/rero/<pid(rero):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
+    mef=dict(
+        pid_type='mef',
+        pid_minter='mef_id',
+        pid_fetcher='mef_id',
+        search_class=RecordsSearch,
+        search_index='authorities',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/authorities/mef',
+        item_route='/authorities/mef/<pid(mef):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+    ),
     doc_csv=dict(
         pid_type='doc',
         pid_minter='document_id',
@@ -280,10 +360,30 @@ RECORDS_UI_ENDPOINTS = {
         "route": "/authorities/<pid_value>",
         "template": "reroils_data/detailed_view_authorities.html"
     },
-    "auth": {
+    "viaf": {
         "pid_type": "viaf",
         "route": "/authorities/viaf/<pid_value>",
         "template": "reroils_data/detailed_view_authorities_viaf.html"
+    },
+    "gnd": {
+        "pid_type": "gnd",
+        "route": "/authorities/gnd/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities_gnd.html"
+    },
+    "rero": {
+        "pid_type": "rero",
+        "route": "/authorities/rero/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities_rero.html"
+    },
+    "mef": {
+        "pid_type": "mef",
+        "route": "/authorities/mef/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities_mef.html"
+    },
+    "bnf": {
+        "pid_type": "bnf",
+        "route": "/authorities/bnf/<pid_value>",
+        "template": "reroils_data/detailed_view_authorities_bnf.html"
     },
     "doc_export": {
         "pid_type": "doc",
