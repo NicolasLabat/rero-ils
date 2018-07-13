@@ -30,7 +30,7 @@ function load_bnf()  {
     if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/bnf.json ]; then
         echo "File bnf.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/bnf.json schema http://ils.test.rero.ch/schema/authorities/bnf-v0.0.1.json | invenio records create --pid-minter bnf_id
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/bnf.json schema http://ils.test.rero.ch/schema/authorities/bnf-person-v0.0.1.json | invenio records create --pid-minter bnf_id
         invenio index reindex --yes-i-know --pid-type bnf
         invenio index run -c 4
     fi
@@ -41,7 +41,7 @@ function load_gnd() {
     if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/gnd.json ]; then
         echo "File gnd.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/gnd.json schema http://ils.test.rero.ch/schema/authorities/gnd-v0.0.1.json | invenio records create --pid-minter gnd_id
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/gnd.json schema http://ils.test.rero.ch/schema/authorities/gnd-person-v0.0.1.json | invenio records create --pid-minter gnd_id
         invenio index reindex --yes-i-know --pid-type gnd
         invenio index run -c 4
     fi
@@ -52,7 +52,7 @@ function load_rero() {
     if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/rero.json ]; then
         echo "File rero.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-v0.0.1.json | invenio records create --pid-minter rero_id
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/rero.json schema http://ils.test.rero.ch/schema/authorities/rero-person-v0.0.1.json | invenio records create --pid-minter rero_id
         invenio index reindex --yes-i-know --pid-type rero
         invenio index run -c 4
     fi
@@ -62,7 +62,7 @@ function load_reroils() {
     if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/reroils.json ]; then
         echo "File reroils.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-v0.0.1.json | invenio records create --pid-minter mef_id
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-person-v0.0.1.json | invenio records create --pid-minter mef_id
         invenio index reindex --yes-i-know --pid-type mef
         invenio index run -c 4
     fi
