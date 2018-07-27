@@ -58,11 +58,11 @@ function load_rero() {
     fi
 }
 
-function load_reroils() {
-    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/reroils.json ]; then
+function load_mef() {
+    if [ ! -f $VIRTUAL_ENV/src/reroils-data/data/mef.json ]; then
         echo "File reroils.json not found!"
     else
-        dojson -i $VIRTUAL_ENV/src/reroils-data/data/reroils.json schema http://ils.test.rero.ch/schema/authorities/reroils-person-v0.0.1.json | invenio records create --pid-minter mef_id
+        dojson -i $VIRTUAL_ENV/src/reroils-data/data/mef.json schema http://ils.test.rero.ch/schema/authorities/mef-person-v0.0.1.json | invenio records create --pid-minter mef_id
         invenio index reindex --yes-i-know --pid-type mef
         invenio index run -c 4
     fi
@@ -81,15 +81,15 @@ case $1 in
     rero)                                
         load_rero
     ;;
-    reroils)                                
-        load_reroils
+    mef)                                
+        load_mef
     ;;
     all)                                
         load_viaf
         load_bnf
         load_gnd
         load_rero
-        load_reroils
+        load_mef
     ;;
     *)
         echo "Invalid input!"
